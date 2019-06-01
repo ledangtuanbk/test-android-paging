@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private val TAG: String? = GithubService::class.simpleName
+private const val TAG = "GithubService"
 private const val IN_QUALIFIER = "in:name,description"
 
 interface GithubService {

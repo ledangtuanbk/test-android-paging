@@ -9,7 +9,9 @@ class GithubLocalCache(
     private val ioExecutor: Executor
 ) {
 
-    private val TAG = GithubLocalCache::class.simpleName
+    companion object{
+        private const val TAG = "GithubLocalCache";
+    }
 
     fun insert(repos:List<Repo>, insertFinished: ()->Unit){
         ioExecutor.execute {
@@ -21,7 +23,7 @@ class GithubLocalCache(
 
     fun reposByName(name:String):LiveData<List<Repo>>{
         val query = "%${name.replace(' ', '%')}%"
-        return repoDao.
+        return repoDao.reposByName(query)
     }
 
 }

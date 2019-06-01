@@ -8,8 +8,6 @@ class GithubRepository(
     private val cache: GithubLocalCache
 ) {
 
-    private val TAG: String? = GithubRepository::class.simpleName
-
     // keep the last requested page. when the request is successful, increment the page number
     private var lastRequestPage = 1
 
@@ -21,7 +19,8 @@ class GithubRepository(
         Log.d(TAG, "new query $query")
         lastRequestPage = 1
         requestAndSaveData(query)
-        val data = cache.re
+        val data = cache.reposByName(query)
+        return RepoSearchResult(data, networkErrors)
     }
 
     private fun requestAndSaveData(query: String) {
@@ -41,5 +40,7 @@ class GithubRepository(
 
     companion object {
         private const val NETWORK_PAGE_SIZE = 10
+        private const val TAG = "GithubRepository"
     }
 }
+
